@@ -51,15 +51,15 @@ class App extends Component {
         <div >
           {this.state.persons.map((person, index) => {
             return <Person
-              click={() => this.deletePersonHandler(index)}
-              name={person.name}
-              age={person.age}
-              key={person.id}
-              changed={(event) => this.nameChangeHandler(event, person.id)} />
+                click={() => this.deletePersonHandler(index)}
+                name={person.name}
+                age={person.age}
+                key={person.id}
+                changed={(event) => this.nameChangeHandler(event, person.id)} />
           })}
         </div>
       )
-      btnClass=classes.Red
+      btnClass = classes.Red
     }
     let assignedClasses = [];
     if (this.state.persons.length <= 3) {
@@ -73,18 +73,18 @@ class App extends Component {
     }
 
     return (
-        <div className={classes.App}>
-          <h1 title='Guru'>This is Gururaj</h1>
-          {
-            this.state.persons.length > 0
-              ? <p className={assignedClasses.join(' ')}>I am working Good</p>
-              : null
-          }
-          <button className={btnClass} onClick={this.togglePersonHandler}>
-            Switch name
+      <div className={classes.App}>
+        <h1 title='Guru'>This is Gururaj</h1>
+        {
+          this.state.persons.length > 0
+            ? <p className={assignedClasses.join(' ')}>I am working Good</p>
+            : null
+        }
+        <button className={btnClass} onClick={this.togglePersonHandler}>
+          Switch name
         </button>
-          {persons}
-        </div>
+        {persons}
+      </div>
     );
   }
 }
