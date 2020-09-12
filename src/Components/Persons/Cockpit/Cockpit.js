@@ -1,7 +1,16 @@
-import React from 'react'
+import React, { useEffect} from 'react'
 import classes from './Cockpit.css'
 
 const cockpit = (props) => {
+
+  useEffect(()=> {
+    console.log('cockpit')
+    //http request can be writen here
+    setTimeout(()=> {
+      alert('Gururaj')
+    },1000);
+  }, []);
+
   let btnClass = '';
   let assignedClasses = [];
 
@@ -9,13 +18,13 @@ const cockpit = (props) => {
     btnClass = classes.Red;
   }
 
-  if (props.persons.length <= 3) {
+  if (props.personsLength <= 3) {
     assignedClasses.push(classes.red);
   }
-  if (props.persons.length <= 1) {
+  if (props.personsLength <= 1) {
     assignedClasses.push(classes.bold);
   }
-  if (props.persons.length === 0) {
+  if (props.personsLength === 0) {
     assignedClasses = []
   }
 
@@ -23,7 +32,7 @@ const cockpit = (props) => {
     <div className = {classes.Cockpit}>
       <h1 title='Guru'>This is Gururaj</h1>
       {
-        props.persons.length > 0
+        props.personsLength > 0
           ? <p className={assignedClasses.join(' ')}>I am working Good</p>
           : null
       }
@@ -33,4 +42,4 @@ const cockpit = (props) => {
     </div>
   )
 }
-export default cockpit;
+export default React.memo(cockpit);
