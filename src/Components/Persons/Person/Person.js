@@ -1,14 +1,36 @@
-import React from 'react';
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import classes from './Person.css';
 
-const person = (props) => {
-    return (
-        <div className={classes.Person}>
-            <p onClick={props.click}>My name is {props.name} and age is {props.age}</p>
-            <p>{props.children}</p>
-            <input type='text' onChange={props.changed} value={props.name}/>
-        </div> 
-    )
+class Person extends Component {
+    
+    // componentDidMount(){
+    //     document.querySelector('input').focus();
+    // }
+    componentDidUpdate(){
+        document.querySelector('input').focus();
+    }
+    render() {
+        return (
+            <div className={classes.Person}>
+                {
+                    this.props.isAuth ?
+                        <div>
+                            <p onClick={this.props.click}>My name is {this.props.name} and age is {this.props.age}</p>
+                            <p>{this.props.children}</p>
+                            <input type='text' onChange={this.props.changed} value={this.props.name} />
+                        </div>
+                        : <p>Please Login</p>
+                }
+            </div>
+        )
+    }
 }
-export default person;
+Person.propTypes = {
+    click: PropTypes.func,
+    name: PropTypes.string,
+    age: PropTypes.number,
+    changed: PropTypes.func
+}
+export default Person;

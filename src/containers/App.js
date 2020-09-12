@@ -6,14 +6,22 @@ import Cockpit from '../Components/Persons/Cockpit/Cockpit'
 class App extends Component {
   state = {
     persons: [
-      { id: 'assd', name: 'Guru', age: '26' },
-      { id: 'asccsd', name: 'Guru', age: '26' },
-      { id: 'adsfs', name: "Jagu", age: '25' },
-      { id: 'asssdd', name: 'Guru', age: '26' },
-      { id: 'adsadsfdfs', name: "Jagu", age: '25' }
+      { id: 'assd', name: 'Guru', age: 26 },
+      { id: 'asccsd', name: 'Guru', age: 26 },
+      { id: 'adsfs', name: "Jagu", age: 25 },
+      { id: 'asssdd', name: 'Guru', age: 26 },
+      { id: 'adsadsfdfs', name: "Jagu", age: 25 }
     ],
     name: 'test',
-    showPersons: false
+    showPersons: false,
+    Authenticated: false
+  }
+
+  isAuthenticatedHandler = () => {
+    let doestAuth = this.state.isAuthenticated
+    this.setState({
+      Authenticated: !doestAuth
+    })
   }
 
   togglePersonHandler = () => {
@@ -48,11 +56,13 @@ class App extends Component {
 
     let persons = null;
 
-    if (this.state.showPersons) {
+    if (this.state.showPersons ) {
       persons = <Persons
             persons={this.state.persons}
             clicked={this.deletePersonHandler}
-            changed={this.nameChangeHandler} />;
+            changed={this.nameChangeHandler} 
+            isAuthenticated={this.state.Authenticated}
+            />;
     }
 
     return (
@@ -60,6 +70,7 @@ class App extends Component {
         <Cockpit
           showPersons={this.state.showPersons}
           personsLength={this.state.persons.length} 
+          isAuthenticated = {this.isAuthenticatedHandler}
           clickPersonHandler = {this.togglePersonHandler}/>
         {persons}
       </div>

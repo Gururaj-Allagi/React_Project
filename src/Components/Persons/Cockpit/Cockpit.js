@@ -1,20 +1,23 @@
-import React, { useEffect} from 'react'
+import React, { useEffect, useRef } from 'react'
 import classes from './Cockpit.css'
 
 const cockpit = (props) => {
-
-  useEffect(()=> {
+  const togglebtnRef = useRef(null);
+  useEffect(() => {
     console.log('cockpit')
     //http request can be writen here
-    setTimeout(()=> {
-      alert('Gururaj')
-    },1000);
+    setTimeout(() => {
+      togglebtnRef.current.click();
+    }, 1000);
+    return()=>{
+      console.log("running before cockpit useEffect")
+    }
   }, []);
 
   let btnClass = '';
   let assignedClasses = [];
 
-  if (props.showPersons){
+  if (props.showPersons) {
     btnClass = classes.Red;
   }
 
@@ -25,21 +28,25 @@ const cockpit = (props) => {
     assignedClasses.push(classes.bold);
   }
   if (props.personsLength === 0) {
+
     assignedClasses = []
   }
 
   return (
-    <div className = {classes.Cockpit}>
+    <div className={classes.Cockpit}>
       <h1 title='Guru'>This is Gururaj</h1>
       {
         props.personsLength > 0
           ? <p className={assignedClasses.join(' ')}>I am working Good</p>
           : null
       }
-      <button className={btnClass} onClick={props.clickPersonHandler}>
+      <button onClick = {props.isAuthenticated}>Auth</button>
+      <button ref={togglebtnRef} 
+        className={btnClass}
+        onClick={props.clickPersonHandler}>
         Switch name
-        </button>
+      </button>
     </div>
   )
 }
-export default React.memo(cockpit);
+export default cockpit;
