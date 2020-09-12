@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import classes from './App.css';
-import Person from './Person/Person'
+import Persons from '../Components/Persons/Persons'
+import Cockpit from '../Components/Persons/Cockpit/Cockpit'
 
 class App extends Component {
   state = {
     persons: [
       { id: 'assd', name: 'Guru', age: '26' },
+      { id: 'asccsd', name: 'Guru', age: '26' },
       { id: 'adsfs', name: "Jagu", age: '25' },
       { id: 'asssdd', name: 'Guru', age: '26' },
       { id: 'adsadsfdfs', name: "Jagu", age: '25' }
@@ -43,46 +45,22 @@ class App extends Component {
   }
 
   render() {
-    let btnClass = '';
+
     let persons = null;
 
     if (this.state.showPersons) {
-      persons = (
-        <div >
-          {this.state.persons.map((person, index) => {
-            return <Person
-                click={() => this.deletePersonHandler(index)}
-                name={person.name}
-                age={person.age}
-                key={person.id}
-                changed={(event) => this.nameChangeHandler(event, person.id)} />
-          })}
-        </div>
-      )
-      btnClass = classes.Red
-    }
-    let assignedClasses = [];
-    if (this.state.persons.length <= 3) {
-      assignedClasses.push(classes.red);
-    }
-    if (this.state.persons.length <= 1) {
-      assignedClasses.push(classes.bold);
-    }
-    if (this.state.persons.length === 0) {
-      assignedClasses = []
+      persons = <Persons
+            persons={this.state.persons}
+            clicked={this.deletePersonHandler}
+            changed={this.nameChangeHandler} />;
     }
 
     return (
       <div className={classes.App}>
-        <h1 title='Guru'>This is Gururaj</h1>
-        {
-          this.state.persons.length > 0
-            ? <p className={assignedClasses.join(' ')}>I am working Good</p>
-            : null
-        }
-        <button className={btnClass} onClick={this.togglePersonHandler}>
-          Switch name
-        </button>
+        <Cockpit
+          showPersons={this.state.showPersons}
+          persons={this.state.persons} 
+          clickPersonHandler = {this.togglePersonHandler}/>
         {persons}
       </div>
     );
